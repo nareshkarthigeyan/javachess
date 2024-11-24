@@ -1,22 +1,26 @@
 package main;
 
-import pieces.*;
-
-import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import javax.swing.*;
+import pieces.*;
 
 public class Board extends JPanel {
     public int tileSize = 85;
     int cols = 8, rows = 8;
     final int layoutSize = (tileSize * cols) + tileSize;
 
+    Input input = new Input(this);
 
     ArrayList<Piece> piecesList = new ArrayList<>();
+
+    public Piece selectedPiece;
 
     public Board() {
         this.setPreferredSize(new Dimension(cols*tileSize, rows*tileSize));
         this.setBackground(Color.GREEN);
+        this.addMouseListener(input);
+        this.addMouseMotionListener(input);
         addPieces();
     }
 
@@ -64,6 +68,39 @@ public class Board extends JPanel {
         piecesList.add(new Pawn(this, 5, 6, true));
         piecesList.add(new Pawn(this, 6, 6, true));
         piecesList.add(new Pawn(this, 7, 6, true));
+    }
+
+    public Piece getPiece(int col, int row){
+        for(Piece p: piecesList){
+            if(p.row == row && p.col == col){
+                return p;
+            }
+        }
+        return null;
+    }
+
+    public boolean isValidMove(Move move){
+        //TODO
+        if(sameTeam(move.piece, move.capture)) return false;
+        return true;
+    }
+
+    public void makeMove(Move move){
+        move.piece.col = move.newCol;
+        move.piece.row = move.newRow;
+        move.piece.xPos = move.newCol * tileSize;
+        move.piece.yPos = move.newRow * tileSize;
+
+        capture(move);
+    }
+
+    public void capture(Move move){
+        piecesList.remove(move.capture);
+    }
+
+    public boolean sameTeam(Piece p1, Piece p2){
+        if(p1 == null || p2 == null){ return false; }
+        return p1.isWhite == p2.isWhite;
     }
 
     public void paintComponent(Graphics g) {
