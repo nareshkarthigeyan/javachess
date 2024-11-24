@@ -1,7 +1,6 @@
 package main;
 
-import pieces.Knight;
-import pieces.Piece;
+import pieces.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,7 +21,49 @@ public class Board extends JPanel {
     }
 
     public void addPieces(){
-        piecesList.add(new Knight(this, 4, 5, false));
+        // Black pieces
+        piecesList.add(new Knight(this, 1, 0, false));
+        piecesList.add(new Knight(this, 6, 0, false));
+
+        piecesList.add(new Bishop(this, 2, 0, false));
+        piecesList.add(new Bishop(this, 5, 0, false));
+
+        piecesList.add(new Rook(this, 0, 0, false));
+        piecesList.add(new Rook(this, 7, 0, false));
+
+        piecesList.add(new Queen(this, 3, 0, false));
+        piecesList.add(new King(this, 4, 0, false));
+
+        piecesList.add(new Pawn(this, 0, 1, false));
+        piecesList.add(new Pawn(this, 1, 1, false));
+        piecesList.add(new Pawn(this, 2, 1, false));
+        piecesList.add(new Pawn(this, 3, 1, false));
+        piecesList.add(new Pawn(this, 4, 1, false));
+        piecesList.add(new Pawn(this, 5, 1, false));
+        piecesList.add(new Pawn(this, 6, 1, false));
+        piecesList.add(new Pawn(this, 7, 1, false));
+
+        // White pieces
+        piecesList.add(new Knight(this, 1, 7, true));
+        piecesList.add(new Knight(this, 6, 7, true));
+
+        piecesList.add(new Bishop(this, 2, 7, true));
+        piecesList.add(new Bishop(this, 5, 7, true));
+
+        piecesList.add(new Rook(this, 0, 7, true));
+        piecesList.add(new Rook(this, 7, 7, true));
+
+        piecesList.add(new Queen(this, 3, 7, true));
+        piecesList.add(new King(this, 4, 7, true));
+
+        piecesList.add(new Pawn(this, 0, 6, true));
+        piecesList.add(new Pawn(this, 1, 6, true));
+        piecesList.add(new Pawn(this, 2, 6, true));
+        piecesList.add(new Pawn(this, 3, 6, true));
+        piecesList.add(new Pawn(this, 4, 6, true));
+        piecesList.add(new Pawn(this, 5, 6, true));
+        piecesList.add(new Pawn(this, 6, 6, true));
+        piecesList.add(new Pawn(this, 7, 6, true));
     }
 
     public void paintComponent(Graphics g) {
